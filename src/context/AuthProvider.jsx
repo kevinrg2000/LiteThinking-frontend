@@ -7,7 +7,10 @@ const AuthContext = createContext();
 const AuthProvider = ({children}) => {
 
     const [auth, setAuth] = useState({})
-    const [tipo, setTipo] = useState({})  
+    const [tipo, setTipo] = useState({})
+    const [cargando, setCargando] = useState(true)
+
+    
 
     useEffect(() => {
         const autenticarUsuario = async () => {

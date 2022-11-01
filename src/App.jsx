@@ -17,7 +17,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <AuthProvider>
+      {/* <AuthProvider> */}
           <Routes>
               <Route path="/" element={<AuthLayout />}>
                   <Route index element={<Login />} />
@@ -31,7 +31,7 @@ function App() {
               </Route>
           </Routes>
 
-      </AuthProvider>
+      {/* </AuthProvider> */}
     </BrowserRouter>
   )
 }
