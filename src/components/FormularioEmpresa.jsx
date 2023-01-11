@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import Alerta from './Alerta'
-
+import useEmpresas from '../hooks/useEmpresas'
 const FormularioEmpresa = () => {
     const [id, setId] = useState(null)
     const [nombre, setNombre] = useState('')
@@ -12,7 +12,7 @@ const FormularioEmpresa = () => {
     const [ alerta, setAlerta ] = useState({})
 
     const params = useParams();
-    
+    const {  submitEmpresa, empresa } = useEmpresas();
 
     useEffect(() => {
         if( params.id ) {
@@ -29,7 +29,7 @@ const FormularioEmpresa = () => {
 
     const handleSubmit = async e => {
         e.preventDefault();
-
+        
         if([nombre, direccion, nit,telefono].includes('') ) {
             setAlerta({
                 msg: 'Todos los Campos son Obligatorios',
@@ -39,18 +39,21 @@ const FormularioEmpresa = () => {
         }
         // Crear la empresa en el api 
         try {
-            const { data } = await clienteAxios.post(`/empresas`, {id, nombre, direccion, nit, telefono,} )
-
-            setAlerta({
-                msg: data.msg,
-                error: false
-            })
+            
+            await submitEmpresa({ id,nombre,direccion,nit,telefono,alerta})
 
             setId(null)
             setNombre('')
             setDireccion('')
             setNit('')
             setTelefono('')
+            
+            setAlerta({
+                msg: 'Empresa creada correctamente',
+                error: false
+            })
+            return
+
             
         } catch (error) {
             setAlerta({

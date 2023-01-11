@@ -29,6 +29,7 @@ const AuthProvider = ({children}) => {
 
             try {
                 const { data } = await clienteAxios('/usuarios/perfil', config)
+                console.log('autenticando:');
                 setAuth(data)
                 
 
@@ -42,11 +43,6 @@ const AuthProvider = ({children}) => {
         }
         autenticarUsuario()
     }, [])
-
-    const cerrarSesionAuth = () => {
-        setAuth({})
-    }
-
 
     return (
         <AuthContext.Provider

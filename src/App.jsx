@@ -9,15 +9,16 @@ import OlvidePassword from './paginas/OlvidePassword'
 import NuevoPassword from './paginas/NuevoPassword'
 import ConfirmarCuenta from './paginas/ConfirmarCuenta'
 import Empresas from './paginas/Empresas'
-import AuthProvider  from './context/AuthProvider'
+import {AuthProvider}  from './context/AuthProvider'
 
-
+import {EmpresasProvider} from './context/EmpresasProvider'
 function App() {
 
 
   return (
     <BrowserRouter>
-      {/* <AuthProvider> */}
+      <AuthProvider>
+        <EmpresasProvider>
           <Routes>
               <Route path="/" element={<AuthLayout />}>
                   <Route index element={<Login />} />
@@ -30,8 +31,8 @@ function App() {
               <Route path="/empresas" element={<Empresas />}>
               </Route>
           </Routes>
-
-      {/* </AuthProvider> */}
+        </EmpresasProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
